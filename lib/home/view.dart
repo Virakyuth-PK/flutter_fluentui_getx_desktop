@@ -48,6 +48,9 @@ class HomePage extends StatelessWidget {
                       child: const Text('Open in a new shell route'),
                     ),
                   ),
+                  Obx(() {
+                    return Text("${state.asd}");
+                  })
                 ],
               )
             ],

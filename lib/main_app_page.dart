@@ -210,26 +210,29 @@ class _MainAppPageState extends State<MainAppPage> with WindowListener {
               ),
             );
           }(),
-          actions: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-            Align(
-              alignment: AlignmentDirectional.centerEnd,
-              child: Padding(
-                padding: const EdgeInsetsDirectional.only(end: 8.0),
-                child: ToggleSwitch(
-                  content: const Text('Dark Mode'),
-                  checked: FluentTheme.of(context).brightness.isDark,
-                  onChanged: (v) {
-                    if (v) {
-                      appTheme.mode = ThemeMode.dark;
-                    } else {
-                      appTheme.mode = ThemeMode.light;
-                    }
-                  },
+          actions: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Align(
+                alignment: AlignmentDirectional.centerEnd,
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.only(end: 8.0),
+                  child: ToggleSwitch(
+                    content: const Text('Dark Mode'),
+                    checked: FluentTheme.of(context).brightness.isDark,
+                    onChanged: (v) {
+                      if (v) {
+                        appTheme.mode = ThemeMode.dark;
+                      } else {
+                        appTheme.mode = ThemeMode.light;
+                      }
+                    },
+                  ),
                 ),
               ),
-            ),
-            if (!kIsWeb) const WindowButtons(),
-          ]),
+              if (!kIsWeb) const WindowButtons(),
+            ],
+          ),
         ),
         paneBodyBuilder: (item, child) {
           final name =
