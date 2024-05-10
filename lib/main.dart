@@ -1,5 +1,11 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_fluentui_getx_desktop/home1/logic.dart';
+import 'package:flutter_fluentui_getx_desktop/home1/view.dart';
+import 'package:flutter_fluentui_getx_desktop/home2/logic.dart';
+import 'package:flutter_fluentui_getx_desktop/home2/view.dart';
+import 'package:flutter_fluentui_getx_desktop/home_detail/logic.dart';
+import 'package:flutter_fluentui_getx_desktop/home_detail/view.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:system_theme/system_theme.dart';
@@ -50,7 +56,7 @@ Future<void> main() async {
       await windowManager.setMinimumSize(const Size(500, 600));
       await windowManager.show();
       await windowManager.setPreventClose(true);
-      await windowManager.setSkipTaskbar(false);
+      await windowManager.setSkipTaskbar(true);
     });
   }
 
@@ -132,6 +138,24 @@ final router = GoRouter(navigatorKey: rootNavigatorKey, routes: [
           builder: (context, state) {
             Get.lazyPut(() => SettingLogic());
             return SettingPage();
+          }),
+      GoRoute(
+          path: '/home1',
+          builder: (context, state) {
+            Get.lazyPut(() => Home1Logic());
+            return Home1Page();
+          }),
+      GoRoute(
+          path: '/home2',
+          builder: (context, state) {
+            Get.lazyPut(() => Home2Logic());
+            return Home2Page();
+          }),
+      GoRoute(
+          path: '/home_detail',
+          builder: (context, state) {
+            Get.lazyPut(() => HomeDetailLogic());
+            return HomeDetailPage();
           }),
     ],
   ),
