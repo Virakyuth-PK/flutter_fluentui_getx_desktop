@@ -29,7 +29,6 @@ class LoginLogic extends GetxController {
         onComplete: (LoginResponse data) {
           Logger().i(data.token);
           isLoggedIn(true);
-          Get.context!.push("/home");
         });
   }
 }

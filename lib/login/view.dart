@@ -8,6 +8,7 @@ class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
 
   final logic = Get.put(LoginLogic());
+
   final state = Get.find<LoginLogic>().state;
 
   @override
@@ -18,8 +19,9 @@ class LoginPage extends StatelessWidget {
           children: [
             Text("Login"),
             TextButton(
-              onPressed: () {
-                logic.login();
+              onPressed: () async {
+                await logic.login();
+                context.push("/home");
               },
               child: Text("go to Home"),
             ),
