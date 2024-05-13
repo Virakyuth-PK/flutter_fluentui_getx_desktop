@@ -39,7 +39,6 @@ class _Home1PageState extends State<Home1Page> {
       onClosed: () {
         setState(() {
           tabs!.remove(tab);
-
           if (currentIndex > 0) currentIndex--;
         });
       },

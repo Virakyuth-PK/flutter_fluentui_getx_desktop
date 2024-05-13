@@ -35,7 +35,7 @@ class _MainAppPageState extends State<MainAppPage> with WindowListener {
 
   late final List<NavigationPaneItem> originalItems = [
     PaneItem(
-      key: const ValueKey('/'),
+      key: const ValueKey('/home'),
       icon: const Icon(FluentIcons.home),
       title: const Text('Home'),
       body: const SizedBox.shrink(),
@@ -159,7 +159,6 @@ class _MainAppPageState extends State<MainAppPage> with WindowListener {
           automaticallyImplyLeading: false,
           leading: () {
             final enabled = widget.shellContext != null && router.canPop();
-
             final onPressed = enabled
                 ? () {
                     if (router.canPop()) {

@@ -43,6 +43,8 @@ dependencies:
   get: ^4.6.6
   flutter_syntax_view: ^4.1.0
   google_fonts: ^6.2.1
+  freezed: any
+  logger: ^2.3.0
 
 dev_dependencies:
   flutter_test:

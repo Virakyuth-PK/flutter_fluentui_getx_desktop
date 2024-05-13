@@ -6,6 +6,8 @@ import 'package:flutter_fluentui_getx_desktop/home2/logic.dart';
 import 'package:flutter_fluentui_getx_desktop/home2/view.dart';
 import 'package:flutter_fluentui_getx_desktop/home_detail/logic.dart';
 import 'package:flutter_fluentui_getx_desktop/home_detail/view.dart';
+import 'package:flutter_fluentui_getx_desktop/login/logic.dart';
+import 'package:flutter_fluentui_getx_desktop/login/view.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:system_theme/system_theme.dart';
@@ -32,7 +34,7 @@ bool get isDesktop {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  Get.put(LoginLogic());
   // if it's not on the web, windows or android, load the accent color
   if (!kIsWeb &&
       [
@@ -116,47 +118,63 @@ class MyApp extends StatelessWidget {
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
-final router = GoRouter(navigatorKey: rootNavigatorKey, routes: [
-  ShellRoute(
-    navigatorKey: _shellNavigatorKey,
-    builder: (context, state, child) {
-      return MainAppPage(
-        shellContext: _shellNavigatorKey.currentContext,
-        child: child,
-      );
-    },
-    routes: [
-      /// Home
-      GoRoute(
-          path: '/',
-          builder: (context, state) {
-            Get.lazyPut(() => HomeLogic());
-            return HomePage();
-          }),
-      GoRoute(
-          path: '/settings',
-          builder: (context, state) {
-            Get.lazyPut(() => SettingLogic());
-            return SettingPage();
-          }),
-      GoRoute(
-          path: '/home1',
-          builder: (context, state) {
-            Get.lazyPut(() => Home1Logic());
-            return Home1Page();
-          }),
-      GoRoute(
-          path: '/home2',
-          builder: (context, state) {
-            Get.lazyPut(() => Home2Logic());
-            return Home2Page();
-          }),
-      GoRoute(
-          path: '/home_detail',
-          builder: (context, state) {
-            Get.lazyPut(() => HomeDetailLogic());
-            return HomeDetailPage();
-          }),
-    ],
-  ),
-]);
+final router = GoRouter(
+  navigatorKey: rootNavigatorKey,
+  routes: [
+    ShellRoute(
+      navigatorKey: _shellNavigatorKey,
+      builder: (context, state, child) {
+        // Check if the user is logged in
+        if (Get.find<LoginLogic>().state.isLogin.value == true) {
+          // If logged in, navigate to the main page
+          return MainAppPage(
+            shellContext: _shellNavigatorKey.currentContext,
+            child: child,
+          );
+        } else {
+          // If not logged in, navigate to the login page
+          return LoginPage();
+        }
+      },
+      routes: [
+        /// Home
+        GoRoute(
+            path: '/',
+            builder: (context, state) {
+              Get.lazyPut(() => LoginLogic());
+              return LoginPage();
+            }),
+        GoRoute(
+            path: '/home',
+            builder: (context, state) {
+              Get.lazyPut(() => HomeLogic());
+              return HomePage();
+            }),
+        GoRoute(
+            path: '/settings',
+            builder: (context, state) {
+              Get.lazyPut(() => SettingLogic());
+              return SettingPage();
+            }),
+        GoRoute(
+            path: '/home1',
+            builder: (context, state) {
+              Get.lazyPut(() => Home1Logic());
+              return Home1Page();
+            }),
+        GoRoute(
+            path: '/home2',
+            builder: (context, state) {
+              Get.lazyPut(() => Home2Logic());
+              return Home2Page();
+            }),
+        GoRoute(
+            path: '/home_detail',
+            builder: (context, state) {
+              Get.lazyPut(() => HomeDetailLogic());
+              return HomeDetailPage();
+            }),
+      ],
+    ),
+  ],
+);
