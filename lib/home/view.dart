@@ -56,7 +56,12 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               GetBuilder<LoginLogic>(builder: (logic) {
-                return Text("${stateLogin.loginResponse.userName}");
+                return Column(
+                  children: [
+                    Text("${stateLogin.loginResponse.userName}"),
+                    Text("${stateLogin.loginResponse.userId}"),
+                  ],
+                );
               }),
             ],
           );
