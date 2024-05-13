@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fluentui_getx_desktop/home_detail/view.dart';
+import 'package:flutter_fluentui_getx_desktop/login/logic.dart';
 import 'package:get/get.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:go_router/go_router.dart';
@@ -11,6 +12,7 @@ class HomePage extends StatelessWidget {
 
   final logic = Get.find<HomeLogic>();
   final state = Get.find<HomeLogic>().state;
+  final stateLogin = Get.find<LoginLogic>().state;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,10 @@ class HomePage extends StatelessWidget {
                     return Text("${state.asd}");
                   })
                 ],
-              )
+              ),
+              GetBuilder<LoginLogic>(builder: (logic) {
+                return Text("${stateLogin.loginResponse.userName}");
+              }),
             ],
           );
         }),

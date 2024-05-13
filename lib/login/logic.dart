@@ -28,6 +28,7 @@ class LoginLogic extends GetxController {
         endPoint: ApiEndpoint.auth(AuthEndpoint.LOGIN),
         onComplete: (LoginResponse data) {
           Logger().i(data.token);
+          state.loginResponse = data;
           isLoggedIn(true);
         });
   }
